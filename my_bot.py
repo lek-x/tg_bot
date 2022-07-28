@@ -3,12 +3,11 @@ my tg bot
 """
 from __future__ import absolute_import
 import os
-import telebot
-from config import weatherbot
-#from telebot import types
 import datetime
+import telebot
 import requests
 token=os.environ.get('bottoken')
+weathertok=os.environ.get('weathertok')
 bot = telebot.TeleBot(token)
 
 @bot.message_handler(commands=['start'])
@@ -16,7 +15,9 @@ def start(message):
     """
     func for starting
     """
-    bot.send_message(message.chat.id, 'Hello! I can show you the weather today in your city. Please send me the name of the city where you would like to know the weather.')
+    bot.send_message(message.chat.id, 'Hello! I can show you the weather today in your city.\
+     Please send me the name of the city \
+    where you would like to know the weather.')
 
 @bot.message_handler(content_types=["text"])
 def get_weather(message):
@@ -35,7 +36,7 @@ def get_weather(message):
     try:
 
         req=requests.get(f"https://api.openweathermap.org/data/2.5/weather?q={message.text}&appid=\
-            {weatherbot}&units=metric")
+            {weathertok}&units=metric")
         data=req.json()
         city=data['name']
         cur_weather=int(data['main']['temp'])
@@ -48,11 +49,13 @@ def get_weather(message):
         wind=data['wind']['speed']
         sunrise=datetime.datetime.fromtimestamp(data['sys']['sunrise'])
         sunset=datetime.datetime.fromtimestamp(data['sys']['sunset'])
-        bot.send_message(message.chat.id, f'The weather in {city}\nCurrent temperature: {cur_weather}C°\
+        bot.send_message(message.chat.id, f'The weather in {city}\n\
+            Current temperature: {cur_weather}C°\
              {weath_e}\nFeels like: {feels_like}C°\n'
-            f'Humidity: {humidity}%\nPressure: {pressure}mmHg\nWind: {wind}m/s\nSunrise: {sunrise}\nSunset: {sunset}'
+            f'Humidity: {humidity}%\nPressure: {pressure}mmHg\nWind:\
+             {wind}m/s\nSunrise: {sunrise}\nSunset: {sunset}'
         )
-    except:
+    except Exception:
         bot.send_message(message.chat.id, "I can't find this city. Try again.")
 
 

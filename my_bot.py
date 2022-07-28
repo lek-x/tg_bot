@@ -36,7 +36,7 @@ def get_weather(message):
     try:
 
         req=requests.get(f"https://api.openweathermap.org/data/2.5/weather?q={message.text}&appid=\
-            {weathertok}&units=metric")
+            {weathertok}&units=metric", False)
         data=req.json()
         city=data['name']
         cur_weather=int(data['main']['temp'])
@@ -55,7 +55,7 @@ def get_weather(message):
             f'Humidity: {humidity}%\nPressure: {pressure}mmHg\nWind:\
              {wind}m/s\nSunrise: {sunrise}\nSunset: {sunset}'
         )
-    except Exception:
+    except Exception as err:
         bot.send_message(message.chat.id, "I can't find this city. Try again.")
 
 

@@ -15,9 +15,7 @@ def start(message):
     """
     func for starting
     """
-    bot.send_message(message.chat.id, 'Hello! I can show you the weather today in your city.\
-    Please send me the name of the city\
-    where you would like to know the weather.')
+    bot.send_message(message.chat.id, 'Hello! I can show you the weather today in your city. Please send me the name of the city where you would like to know the weather.')
 
 @bot.message_handler(content_types=["text"])
 def get_weather(message):
@@ -50,12 +48,8 @@ def get_weather(message):
         wind=data['wind']['speed']
         sunrise=datetime.datetime.fromtimestamp(data['sys']['sunrise'])
         sunset=datetime.datetime.fromtimestamp(data['sys']['sunset'])
-        bot.send_message(message.chat.id, f'The weather in {city}\n\
-            Current temperature: {cur_weather}C°\
-             {weath_e}\nFeels like: {feels_like}C°\n'
-            f'Humidity: {humidity}%\nPressure: {pressure}mmHg\nWind:\
-             {wind}m/s\nSunrise: {sunrise}\nSunset: {sunset}'
-        )
+        bot.send_message(message.chat.id, f'The weather in {city}\nCurrent temperature: {cur_weather}C°{weath_e}\nFeels like: {feels_like}C°\n'
+            f'Humidity: {humidity}%\nPressure: {pressure}mmHg\nWind: {wind}m/s\nSunrise: {sunrise}\nSunset: {sunset}')
     except Exception:
         bot.send_message(message.chat.id, "I can't find this city. Try again.")
 

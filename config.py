@@ -1,1 +1,0 @@
-weatherbot='9e0b4defe6dccc8002f4bc5a15529bee'

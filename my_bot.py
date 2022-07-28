@@ -44,7 +44,7 @@ def get_weather(message):
         if weather_emoji in emoji:
             weath_e=emoji[weather_emoji]
         else:
-            continue
+            weath_e='\U0001f327\ufe0f'
         feels_like=int(data['main']['feels_like'])
         humidity=data['main']['humidity']
         pressure=int(data['main']['pressure']/ 1.333)
@@ -57,7 +57,7 @@ def get_weather(message):
             f'Humidity: {humidity}%\nPressure: {pressure}mmHg\nWind:\
              {wind}m/s\nSunrise: {sunrise}\nSunset: {sunset}'
         )
-    except Exception as TypeError:
+    except Exception:
         bot.send_message(message.chat.id, "I can't find this city. Try again.")
 
 

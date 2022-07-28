@@ -16,7 +16,7 @@ def start(message):
     func for starting
     """
     bot.send_message(message.chat.id, 'Hello! I can show you the weather today in your city.\
-     Please send me the name of the city \
+    Please send me the name of the city\
     where you would like to know the weather.')
 
 @bot.message_handler(content_types=["text"])
@@ -35,8 +35,7 @@ def get_weather(message):
         'Fog':'Fog \U0001f32b'}
     try:
 
-        req=requests.get(f"https://api.openweathermap.org/data/2.5/weather?q={message.text}&appid=\
-            {weathertok}&units=metric")
+        req=requests.get(f"https://api.openweathermap.org/data/2.5/weather?q={message.text}&appid={weathertok}&units=metric")
         data=req.json()
         city=data['name']
         cur_weather=int(data['main']['temp'])

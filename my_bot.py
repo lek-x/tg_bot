@@ -36,13 +36,15 @@ def get_weather(message):
     try:
 
         req=requests.get(f"https://api.openweathermap.org/data/2.5/weather?q={message.text}&appid=\
-            {weathertok}&units=metric", False)
+            {weathertok}&units=metric")
         data=req.json()
         city=data['name']
         cur_weather=int(data['main']['temp'])
         weather_emoji=data['weather'][0]['main']
         if weather_emoji in emoji:
             weath_e=emoji[weather_emoji]
+        else:
+            continue
         feels_like=int(data['main']['feels_like'])
         humidity=data['main']['humidity']
         pressure=int(data['main']['pressure']/ 1.333)
@@ -55,7 +57,7 @@ def get_weather(message):
             f'Humidity: {humidity}%\nPressure: {pressure}mmHg\nWind:\
              {wind}m/s\nSunrise: {sunrise}\nSunset: {sunset}'
         )
-    except Exception as err:
+    except Exception as TypeError:
         bot.send_message(message.chat.id, "I can't find this city. Try again.")
 
 

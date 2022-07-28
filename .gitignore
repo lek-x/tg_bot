@@ -1,0 +1,4 @@
+hiddenfile.txt
+hiddendir/
+env.py
+__pycache__

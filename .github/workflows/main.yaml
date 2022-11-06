@@ -17,7 +17,7 @@ jobs:
               owner: 'lekx',
               repo: 'tgbot_cicd',
               workflow_id: 'main.yaml',
-              ref: 'master'
+              ref: 'main'
             })
         
      

@@ -16,7 +16,7 @@ jobs:
             await github.rest.actions.createWorkflowDispatch({
               owner: 'lekx',
               repo: 'tgbot_cicd',
-              workflow_id: 'main.yml',
+              workflow_id: 'main.yaml',
               ref: 'master'
             })
         

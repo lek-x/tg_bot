@@ -1,0 +1,10 @@
+---
+name: Trigger actions
+on:
+  push:
+jobs:
+  Send_push:
+  steps:
+    - name: Trigger
+      run: |
+      curl -XPOST -u "${{ secrets.PAT_USERNAME}}:${{secrets.PAT_TOKEN}}" -H "Accept: application/vnd.github.everest-preview+json" -H "Content-Type: application/json" https://api.github.com/repos/lekx/tgbot_cicd/dispatches --data '{"event_type": "build_application"}'

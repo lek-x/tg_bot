@@ -2,6 +2,7 @@
 name: Trigger
 on:
   push:
+  workflow_dispatch:
 jobs:
   Send_push:
     runs-on:

@@ -1,9 +1,11 @@
 ---
-name: Trigger actions
+name: Trigger
 on:
   push:
 jobs:
   Send_push:
+    runs-on:
+      - self-hosted
   steps:
     - name: Trigger
       run: |

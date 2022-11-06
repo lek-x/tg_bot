@@ -9,9 +9,15 @@ jobs:
       - self-hosted
     steps:
       - name: Trigger
-        run: |
-         curl -X POST -u "${{ secrets.PAT_USERNAME}}:${{secrets.PAT_TOKEN}}" \
-         'https://api.github.com/repos/lekx/tgbot_cicd/actions/workflows/main.yaml/dispatches' \
-         -H "Accept: application/vnd.github.everest-preview+json" \ 
-         -H "Content-Type: application/json" \
-           --data '{"ref": "main"}'
+        uses: actions/github-script@v6
+        with:
+          github-token: ${{ secrets.PAT_TOKEN }}
+          script: |
+            await github.rest.actions.createWorkflowDispatch({
+              owner: 'lekx',
+              repo: 'tgbot_cicd',
+              workflow_id: 'main.yml',
+              ref: 'master'
+            })
+        
+     

@@ -9,7 +9,7 @@ import requests
 import logging
 
 logger = telebot.logger
-telebot.logger.setLevel(logging.DEBUG) # Outputs debug messages to console.
+telebot.logger.setLevel(logging.DEBUG) # Outputs debug messages to console. test
 
 token=os.environ.get('bottoken')
 weathertok=os.environ.get('weathertok')

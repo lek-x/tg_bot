@@ -6,6 +6,11 @@ import os
 import datetime
 import telebot
 import requests
+import logging
+
+logger = telebot.logger
+telebot.logger.setLevel(logging.DEBUG) # Outputs debug messages to console.
+
 token=os.environ.get('bottoken')
 weathertok=os.environ.get('weathertok')
 bot = telebot.TeleBot(token)

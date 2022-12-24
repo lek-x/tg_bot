@@ -1,7 +1,9 @@
 ---
-name: Trigger
+name: Trigger_prod
 on:
   push:
+    branches:
+      - 'main'
   workflow_dispatch:
 jobs:
   Send_push:
@@ -16,7 +18,30 @@ jobs:
             await github.rest.actions.createWorkflowDispatch({
               owner: 'lek-x',
               repo: 'tgbot_cicd',
-              workflow_id: 'main.yaml',
+              workflow_id: 'build_prod.yaml',
+              ref: 'main'
+            })
+---            
+name: Trigger_dev
+on:
+  push:
+    branches:
+      - '!main'
+  workflow_dispatch:
+jobs:
+  Send_push:
+    runs-on:
+      - self-hosted
+    steps:
+      - name: Trigger
+        uses: actions/github-script@v6
+        with:
+          github-token: ${{ secrets.PAT_TOKEN }}
+          script: |
+            await github.rest.actions.createWorkflowDispatch({
+              owner: 'lek-x',
+              repo: 'tgbot_cicd',
+              workflow_id: 'build_dev.yaml',
               ref: 'main'
             })
         
